@@ -1,0 +1,86 @@
+html {
+  box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+body {
+  background-color: #f5f7fa;
+  line-height: 1.2;
+}
+
+#main {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+}
+
+.menu {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  width: auto;
+  height: 200px;
+}
+
+.menu img {
+border-radius: 270px;
+  padding: 10px;
+  width: 270px;
+  height: 270px;
+}
+
+ul{
+    list-style-type:circle;
+}
+
+/* navbar */
+
+nav ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+nav ul li {
+  font-size: 30px;
+  font-family: sans-serif;
+  background-color: white;
+  border-bottom: 2px solid black;
+  border-right: 2px solid black;
+  letter-spacing: 0.1em;
+  width: 5.9em;
+  height: 1.5em;
+  line-height: 1.5em;
+  position: relative;
+  overflow: hidden;
+  margin: 0.5em;
+  cursor: pointer;
+}
+
+nav ul li span {
+  color: white;
+  mix-blend-mode: difference;
+}
+
+nav ul li::before {
+  content: "";
+  position: absolute;
+  width: 1.5em;
+  height: inherit;
+  background-color: black;
+  border-radius: 50%;
+  top: 0;
+  left: -0.75em;
+  transition: 0.5s ease-out;
+}
+
+nav ul li:hover::before {
+  transform: scale(7.4);
+}
+
+
+a:link{
+    text-decoration: none;
+}
