@@ -1,15 +1,16 @@
 const mainHtml = document.getElementById('mainMd')
-const head = document.getElementsByTagName('head')
+const menu = document.getElementById('menu')
+const menu_movil_button = document.getElementById('menu_movil_button')
 
+let act = 1
 
-var converter = new showdown.Converter()
+let converter = new showdown.Converter()
 
 
 
 fetch('asset/sobremi.md')
     .then(res => res.ok ? res.text() : Promise.reject(res))
     .then(res => {
-        console.log(res)
         text      = res,
         html      = converter.makeHtml(text);
         mainHtml.innerHTML = html
@@ -33,7 +34,6 @@ function screen(name){
     fetch('asset/'+name+'.md')
     .then(res => res.ok ? res.text() : Promise.reject(res))
     .then(res => {
-        console.log(res)
         text      = res,
         html      = converter.makeHtml(text);
         mainHtml.innerHTML = html
@@ -41,3 +41,25 @@ function screen(name){
 
 }
 
+function menu_movil(){
+
+    switch (act){
+
+        case 1:
+            menu.style.display = "flex";
+            menu_movil_button.innerHTML = '✖️'
+            act++;
+            break;
+        case 2:
+            menu.style.display = "none";
+            menu_movil_button.innerHTML = '⬅️'
+            act--
+            break
+        default:
+            act == 0
+            break;
+    }   
+
+
+
+}

@@ -19,4 +19,4 @@ En ambos proyectos trabaje como frontend
 
 <h1 align="center">Te espero en mi github</h1>
 
-<p align="center"> <a href="https://github.com/Dannkol" target="_blank" rel="noreferrer"> <img src="https://img.icons8.com/ios-glyphs/512/github.png" alt="git" width="40" height="40"/> </a> 
+<p align="center"> <a href="https://github.com/Dannkol" target="_blank" rel="noreferrer"> <img class='git' src="https://img.icons8.com/ios-glyphs/512/github.png" alt="git" width="40" height="40"/> </a> 

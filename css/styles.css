@@ -7,7 +7,7 @@ html {
   box-sizing: inherit;
 }
 body {
-  background-color: #f5f7fa;
+  background-color: #fcfcfc;
   line-height: 1.2;
 }
 
@@ -17,15 +17,19 @@ body {
   gap: 40px;
 }
 
-.menu {
+#menu {
   position: -webkit-sticky;
   position: sticky;
   top: 0;
-  width: auto;
+  width: 270px;
   height: 200px;
+
+  display: flex;
+
+  flex-direction: column;
 }
 
-.menu img {
+#menu img {
 border-radius: 270px;
   padding: 10px;
   width: 270px;
@@ -83,4 +87,50 @@ nav ul li:hover::before {
 
 a:link{
     text-decoration: none;
+}
+
+
+
+#menu_movil{
+    display: none;
+}
+
+
+@media only screen and (max-width: 600px) {
+    
+    #menu{
+        display: none;
+        position:fixed;
+        background-color: #f5f7fa;
+        height: 100%;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .git{
+        width: 60px;
+        height: 60px;
+    }
+
+    a img{
+        width: 88%;
+        height: 250px;
+    }
+
+    .tools img{
+        width: 40px;
+        height: 40px;
+    }
+    
+    #menu_movil{
+        display: block;
+        position: relative;
+        text-align: center;
+        z-index: 10;
+        margin-left: 78%;
+    }
+    #menu_movil_button{
+        cursor: pointer;
+    }
 }
