@@ -1,3 +1,12 @@
+<style>
+    @media only screen and (max-width: 600px) {
+        a img{
+            width: 88%;
+            height: 250px;
+        }
+    }
+</style>
+
 <h1 align="center">Proyectos</h1>
 <h3 align="center">Nunca parar de aprender</h3>
 <br>
