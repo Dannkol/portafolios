@@ -98,7 +98,7 @@
 
 [![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=Dannkol&repo=Landig-formadera&theme=radical)](https://github.com/Dannkol/Landig-formadera)
 
-<!-- [![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=Dannkol&repo=menus&theme=radical)](https://github.com/Dannkol/menus) -->
+[![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=Dannkol&repo=menus&theme=radical)](https://github.com/Dannkol/menus) 
 
 [![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=Dannkol&repo=InmobiliApp&theme=radical)](https://github.com/Dannkol/InmobiliApp)
 
