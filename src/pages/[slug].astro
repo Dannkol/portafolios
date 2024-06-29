@@ -6,7 +6,7 @@ import "../../css/styles.css";
 export async function getStaticPaths() {
   const posts = await Astro.glob("../posts/**/*.mdx"); // Ajuste del path para encontrar los posts
   
-  return posts.map((post) => ({
+  return posts.map((post: any) => ({
     params: {
       slug: `${post.frontmatter.slug}`,
     },
