@@ -1,0 +1,6 @@
+@media only screen and (max-width: 600px) {
+    a img{
+        width: 88%;
+        height: 250px;
+    }
+}

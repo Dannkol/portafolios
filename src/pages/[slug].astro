@@ -1,0 +1,31 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import "../../css/styles.css";
+
+export async function getStaticPaths() {
+  const posts = await Astro.glob("../posts/**/*.mdx"); // Ajuste del path para encontrar los posts
+  
+  return posts.map((post) => ({
+    params: {
+      slug: `${post.frontmatter.slug}`,
+    },
+    props: {
+      post,
+    },
+  }));
+}
+
+const { Content, frontmatter } = Astro.props.post;
+---
+
+<Layout title={frontmatter.title}>
+  <div class="outer-container">
+    <Header />
+    <div class="centered-container">
+      <article>
+        <Content />
+      </article>
+    </div>
+  </div>
+</Layout>

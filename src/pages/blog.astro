@@ -1,0 +1,23 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+const posts = await Astro.glob("../posts/**/*.mdx");
+import "../../css/styles.css";
+---
+
+<Layout title="Blog">
+  <div class="outer-container">
+    <Header />
+    <div class="centered-container">
+      <h1>Blog</h1>
+      <p>Post Archive:</p>
+      <ul>
+        {posts.map((post) => (
+          <li>
+            <a href={`${post.frontmatter.slug}`}>{post.frontmatter.title}</a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</Layout>

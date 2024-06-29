@@ -1,140 +1,98 @@
-@import url('https://fonts.googleapis.com/css2?family=Handjet:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&display=swap');
 
-html {
-  box-sizing: border-box;
-}
-*,
-*:before,
-*:after {
-  box-sizing: inherit;
-}
-body {
-  background-color: #000000;
-  line-height: 1.2;
-}
 
 * {
-  font-family: 'Handjet', cursive;
-  color: white;
+  background-color: white;
+  color: black;
+  text-align: justify;
+  -moz-hyphens: auto;
+  -ms-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
 }
 
-#main {
+.outer-container {
   display: flex;
-  justify-content: center;
-  gap: 40px;
-}
-
-#menu {
-  position: -webkit-sticky;
-  position: sticky;
-  top: 0;
-  width: 270px;
-  height: 200px;
-
-  display: flex;
-
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  height: 100%;
 }
 
-#menu img {
-border-radius: 270px;
-  padding: 10px;
-  width: 270px;
-  height: 270px;
+.centered-container {
+  width: 80%; /* Puedes ajustar este valor según sea necesario */
+  max-width: 100wh; /* Máximo ancho del contenedor */
+  height: 80%; /* Ajusta la altura según sea necesario */
+  max-height: 80vh; /* Máxima altura del contenedor */
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  overflow-y: auto; /* Permite desplazamiento vertical si el contenido es mayor al contenedor */
 }
 
-ul{
-    list-style-type:circle;
+@media (max-width: 768px) {
+  .centered-container {
+    width: 90%;
+    height: auto; /* Ajusta para pantallas más pequeñas */
+  }
 }
 
-/* navbar */
+/* Estilos adicionales para el contenido */
+h1, h2, h3 {
+  color: #333;
+  font-family: "Newsreader", serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
 
-nav ul {
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-family: "Newsreader", serif;
+  font-optical-sizing: auto;
+  font-weight: 800;
+  font-style: normal;
+}
+
+h2 {
+  border-bottom: 2px solid #333;
+  padding-bottom: 5px;
+}
+
+h3 {
+  margin-top: 20px;
+}
+
+ul {
   list-style-type: none;
   padding: 0;
 }
 
-nav ul li {
-  font-size: 30px;
-  font-family: sans-serif;
-  background-color: white;
-  border-bottom: 2px solid rgb(255, 0, 0);
-  border-right: 2px solid rgb(0, 140, 255);
-  letter-spacing: 0.1em;
-  width: 5.9em;
-  height: 1.5em;
-  line-height: 1.5em;
-  position: relative;
-  overflow: hidden;
-  margin: 0.5em;
-  cursor: pointer;
+li {
+  margin-bottom: 10px;
+  font-family: "Newsreader", serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
 }
 
-nav ul li span {
-  color: rgb(2, 217, 255);
-  mix-blend-mode: difference;
+a {
+  color: #0066cc;
+  text-decoration:underline;
+  font-family: "Newsreader", serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
 }
 
-nav ul li::before {
-  content: "";
-  position: absolute;
-  width: 1.5em;
-  height: inherit;
-  background-color: rgb(0, 217, 255);
-  border-radius: 50%;
-  top: 0;
-  left: -0.75em;
-  transition: 0.5s ease-out;
-}
-
-nav ul li:hover::before {
-  transform: scale(7.4);
+a:hover {
+  text-decoration: underline;
 }
 
 
-a:link{
-    text-decoration: none;
-}
-
-
-
-#menu_movil{
-    display: none;
-}
-
-
-@media only screen and (max-width: 600px) {
-    
-    #menu{
-        display: none;
-        position:fixed;
-        background-color: #f5f7fa;
-        height: 100%;
-        width: 100%;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .git{
-        width: 60px;
-        height: 60px;
-    }
-
-
-
-    .tools img{
-        width: 40px;
-        height: 40px;
-    }
-    
-    #menu_movil{
-        display: block;
-        position: relative;
-        text-align: center;
-        z-index: 10;
-        margin-left: 78%;
-    }
-    #menu_movil_button{
-        cursor: pointer;
-    }
+.print {
+  position: fixed;
 }
