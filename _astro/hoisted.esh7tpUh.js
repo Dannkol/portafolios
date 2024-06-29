@@ -1,0 +1,1 @@
+import"https://code.iconify.design/2/2.0.3/iconify.min.js";const e=document.querySelector("button.print");e.addEventListener("click",()=>{const n=document.querySelector("#sobremi").innerHTML,t=document.body.innerHTML;document.body.innerHTML=n,window.print(),document.body.innerHTML=t});
