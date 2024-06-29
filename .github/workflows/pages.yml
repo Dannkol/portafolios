@@ -27,10 +27,6 @@ jobs:
         with:
           bun-version: latest
 
-      - name: Setup Pages
-        id: pages
-        uses: actions/configure-pages@v4
-
       - name: Build with Astro
         run: |
           bun install && bun run build
@@ -39,12 +35,9 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: site
-          path: dist/ 
+          path: dist/
 
   deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.pages.outputs.page_url }}
     needs: build
     runs-on: ubuntu-latest
     name: Deploy
@@ -58,5 +51,7 @@ jobs:
           name: site
 
       - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          deploy_key: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./site
