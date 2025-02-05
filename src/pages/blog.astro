@@ -1,23 +1,90 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Header from "../components/Header.astro";
+import { formatDate } from "../components/utils/dateFormatter"
 const posts = await Astro.glob("../posts/**/*.mdx");
-import "../../css/styles.css";
+
+// Ordenar posts por fecha (más reciente primero)
+const sortedPosts = posts.sort((a, b) => {
+  return new Date(b.frontmatter.date) - new Date(a.frontmatter.date);
+});
 ---
 
 <Layout title="Blog">
-  <div class="outer-container">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <Header />
-    <div class="centered-container">
-      <h1>Blog</h1>
-      <p>Post Archive:</p>
-      <ul>
-        {posts.map((post) => (
-          <li>
-            <a href={`${post.frontmatter.slug}`}>{post.frontmatter.title}</a>
-          </li>
+    
+    <div class="py-12">
+      <div class="text-center mb-12">
+        <h1 class="text-4xl font-bold text-gray-900 mb-4">Blog</h1>
+        <p class="text-xl text-gray-600">A little bit about me</p>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {sortedPosts.map((post) => (
+          <article class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300">
+            {post.frontmatter.coverImage && (
+              <div class="aspect-w-16 aspect-h-9">
+                <img 
+                  src={post.frontmatter.coverImage} 
+                  alt={post.frontmatter.title}
+                  class="w-full h-48 object-cover"
+                />
+              </div>
+            )}
+            
+            <div class="p-6">
+              <div class="flex items-center text-sm text-gray-500 mb-2">
+                {post.frontmatter.date && (
+                  <time datetime={post.frontmatter.date}>
+                    {formatDate(post.frontmatter.date)}
+                  </time>
+                )}
+                {post.frontmatter.category && (
+                  <>
+                    <span class="mx-2">&bull;</span>
+                    <span>{post.frontmatter.category}</span>
+                  </>
+                )}
+              </div>
+              
+              <h2 class="text-xl font-semibold text-gray-900 mb-3">
+                <a 
+                  href={`${post.frontmatter.slug}`}
+                  class="hover:text-blue-600 transition-colors duration-200"
+                >
+                  {post.frontmatter.title}
+                </a>
+              </h2>
+              
+              {post.frontmatter.excerpt && (
+                <p class="text-gray-600 mb-4 line-clamp-3">
+                  {post.frontmatter.excerpt}
+                </p>
+              )}
+              
+              {post.frontmatter.tags && (
+                <div class="flex flex-wrap gap-2">
+                  {post.frontmatter.tags.map((tag: string) => (
+                    <span class="inline-block bg-gray-100 rounded-full px-3 py-1 text-sm font-semibold text-gray-600">
+                      #{tag}
+                    </span>
+                  ))}
+                </div>
+              )}
+            </div>
+          </article>
         ))}
-      </ul>
+      </div>
     </div>
   </div>
 </Layout>
+
+<style>
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+</style>

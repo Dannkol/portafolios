@@ -6,29 +6,94 @@ import "../../css/styles.css";
 ---
 
 <Layout title="CV Daniel Manosalva">
-  <div class="outer-container">
+  <div class="min-h-screen bg-gray-50">
     <Header />
-    <div id="sobremi-content" class="centered-container">
-      <button class="print"
-        ><span class="iconify" data-icon="tdesign:print" data-inline="false"
-        ></span></button
-      >
-      <div id="sobremi">
-        <Sobremi />
+    
+    <main class="max-w-4xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
+      <!-- Botón de impresión -->
+      <div class="flex justify-end mb-6">
+        <button 
+          class="print-button flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200 shadow-sm"
+          aria-label="Imprimir CV"
+        >
+          <span class="iconify" data-icon="tdesign:print"></span>
+          <span>Imprimir CV</span>
+        </button>
       </div>
-    </div>
+
+      <!-- Contenedor del CV -->
+      <article id="sobremi" class="bg-white shadow-lg rounded-lg p-8 print:shadow-none print:p-0">
+        <div id="cv-content" class="prose max-w-none">
+          <Sobremi />
+        </div>
+      </article>
+    </main>
   </div>
 </Layout>
 
-<script>
-  const button = document.querySelector("button.print");
+<style>
+  /* Estilos específicos para impresión */
+  @media print {
+    .print-button {
+      display: none;
+    }
+    
+    main {
+      padding: 0 !important;
+      margin: 0 !important;
+    }
 
-  button.addEventListener("click", () => {
+    article {
+      padding: 0 !important;
+    }
+  }
+
+  /* Estilos para el contenido Markdown */
+  :global(.prose h1) {
+    @apply text-3xl font-bold text-gray-900 mb-4;
+  }
+
+  :global(.prose h2) {
+    @apply text-2xl font-semibold text-gray-800 mt-8 mb-4 border-b border-gray-200 pb-2;
+  }
+
+  :global(.prose a) {
+    @apply text-blue-600 hover:text-blue-800 transition-colors duration-200;
+  }
+
+  :global(.headercv) {
+    @apply mb-8;
+  }
+
+  :global(.contact-info) {
+    @apply flex flex-wrap gap-3 text-gray-600 mt-4;
+  }
+
+  :global(.contact-info span) {
+    @apply flex items-center gap-2;
+  }
+
+  :global(.contact-info a) {
+    @apply hover:text-blue-600 transition-colors duration-200;
+  }
+</style>
+
+<script>
+  const printButton = document.querySelector(".print-button");
+  printButton.addEventListener("click", () => {
     const printContent = document.querySelector("#sobremi").innerHTML;
     const originalContent = document.body.innerHTML;
-
     document.body.innerHTML = printContent;
     window.print();
     document.body.innerHTML = originalContent;
+    
+    // Reattach event listener after restoring content
+    document.querySelector(".print-button").addEventListener("click", () => {
+      const printContent = document.querySelector("#sobremi").innerHTML;
+      const originalContent = document.body.innerHTML;
+      document.body.innerHTML = printContent;
+      window.print();
+      document.body.innerHTML = originalContent;
+    });
   });
 </script>
