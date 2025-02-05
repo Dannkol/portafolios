@@ -1,0 +1,37 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Header from "../../components/Header.astro";
+import "../../../css/styles.css";  // Ajusta esta ruta según tu estructura
+
+export async function getStaticPaths() {
+  // Actualizamos la ruta para que busque en content/posts
+  const posts = await Astro.glob("../../posts/**/*.mdx");
+  
+  console.log("Posts encontrados:", posts.map(post => ({
+    title: post.frontmatter.title,
+    slug: post.frontmatter.slug
+  })));
+
+  return posts.map((post) => ({
+    params: { 
+      slug: post.frontmatter.slug
+    },
+    props: { 
+      post 
+    }
+  }));
+}
+
+const { Content, frontmatter } = Astro.props.post;
+---
+
+<Layout title={frontmatter.title}>
+  <div class="outer-container">
+    <Header />
+    <div class="centered-container">
+      <article>
+        <Content />
+      </article>
+    </div>
+  </div>
+</Layout>
