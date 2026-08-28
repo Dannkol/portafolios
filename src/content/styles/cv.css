@@ -60,7 +60,7 @@
   border-bottom: 1px solid #e2e8f0;
 }
 
-#cv-content h2:first-of-type {
+#cv-content .cv-main > h2:first-of-type {
   margin-top: 0;
 }
 
@@ -194,29 +194,160 @@ html.dark {
   }
 }
 
-/* Print — clean black-on-white, compact, no color surfaces */
+/* ---------------------------------------------------------------------------
+   Print — professional one-page-style layout:
+   header on top, experience in a wide left column, education / awards /
+   skills in a narrower right sidebar. Fits on 2 pages or less.
+   --------------------------------------------------------------------------- */
 @page {
   size: A4;
-  margin: 14mm 15mm;
+  margin: 9mm 10mm;
 }
 
 @media print {
+  /* Kill dark mode artifacts: no fixed backdrop, no loader, white page. */
+  .parallax-bg,
+  #loader {
+    display: none !important;
+  }
+  body,
+  article {
+    background: #fff !important;
+  }
+
   #cv-content,
   #cv-content * {
     color: #000 !important;
     background: transparent !important;
   }
 
-  /* Page-break control: never strand a heading, a meta line or a stray
-     line of text at the bottom / top of a page. */
-  #cv-content {
-    font-size: 0.88rem;
-    line-height: 1.45;
-    orphans: 3;
-    widows: 3;
+  /* The inactive language version never prints. */
+  #cv-content .hidden {
+    display: none !important;
   }
 
-  /* A section heading must carry at least its first entry with it. */
+  /* ---- Page grid: main column + sidebar ---- */
+  #cv-content {
+    font-size: 0.73rem;
+    line-height: 1.3;
+  }
+  #cv-content .cv-sheet {
+    display: grid;
+    grid-template-columns: 1.75fr 1fr;
+    column-gap: 6mm;
+  }
+  #cv-content .cv-sheet > .headercv {
+    grid-column: 1 / -1;
+  }
+  #cv-content .cv-sheet > .cv-main {
+    grid-column: 1;
+    min-width: 0;
+  }
+  #cv-content .cv-sheet > .cv-side {
+    grid-column: 2;
+    min-width: 0;
+  }
+
+  /* ---- Header ---- */
+  #cv-content .headercv {
+    margin-bottom: 0.65rem;
+    padding-bottom: 0.55rem;
+    border-bottom: 2px solid #111 !important;
+  }
+  #cv-content .headercv h1 {
+    font-size: 1.45rem;
+    font-weight: 800;
+  }
+  #cv-content .cv-tagline {
+    margin: 0.1rem 0 0.35rem;
+    font-size: 0.75rem;
+  }
+  #cv-content .contact-info {
+    font-size: 0.63rem;
+  }
+
+  /* ---- Section titles: small caps with rule ---- */
+  #cv-content h2 {
+    margin: 0 0 0.45rem;
+    padding-bottom: 2px;
+    border-bottom: 1px solid #999 !important;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+  #cv-content .cv-side h2:not(:first-of-type) {
+    margin-top: 0.85rem;
+  }
+
+  /* ---- Experience entries: title + org·dates on one line ---- */
+  #cv-content .cv-main h3 {
+    display: inline;
+    margin: 0.4rem 0 0;
+    font-size: 0.82rem;
+  }
+  #cv-content .cv-main h3 + p {
+    display: inline;
+    margin: 0;
+    font-size: 0.68rem;
+    font-style: italic;
+  }
+  #cv-content .cv-main h3 + p::before {
+    content: "  \00B7  ";
+    font-style: normal;
+  }
+  #cv-content .cv-main h3 + p a {
+    font-weight: 600;
+  }
+  #cv-content .cv-main p + ul,
+  #cv-content .cv-main h3 + p + ul {
+    margin-top: 0.15rem;
+  }
+
+  /* ---- Sidebar entries stay stacked ---- */
+  #cv-content .cv-side h3 {
+    margin: 0.5rem 0 0;
+    font-size: 0.76rem;
+  }
+  #cv-content .cv-side h3 + p {
+    margin: 0 0 0.15rem;
+    font-size: 0.68rem;
+  }
+  #cv-content .cv-side p {
+    font-size: 0.68rem;
+    margin-bottom: 0.3rem;
+  }
+  #cv-content .cv-side ul {
+    margin: 0.15rem 0 0.3rem;
+  }
+  #cv-content .cv-side ul li {
+    margin-bottom: 0.2rem;
+    font-size: 0.68rem;
+  }
+  #cv-content .skills-list {
+    margin: 0.25rem 0 0.45rem;
+    font-size: 0.7rem;
+  }
+  #cv-content .skills-list .iconify {
+    font-size: 0.95rem;
+  }
+
+  /* ---- Lists ---- */
+  #cv-content ul {
+    margin: 0.15rem 0 0.3rem;
+  }
+  #cv-content ul li {
+    padding-left: 0.8rem;
+    margin-bottom: 0.08rem;
+  }
+  #cv-content ul li::before {
+    background: #000 !important;
+    top: 0.5em;
+    width: 4px;
+    height: 4px;
+  }
+
+  /* ---- Page-break control ---- */
   #cv-content h2,
   #cv-content h3 {
     break-inside: avoid;
@@ -224,54 +355,14 @@ html.dark {
     page-break-inside: avoid;
     page-break-after: avoid;
   }
-
-  /* "org · dates" line is glued to the h3 above and the bullets below. */
-  #cv-content h3 + p {
-    break-before: avoid;
-    break-after: avoid;
-    page-break-before: avoid;
-    page-break-after: avoid;
-  }
-
+  #cv-content h3 + p,
   #cv-content ul {
     break-before: avoid;
     page-break-before: avoid;
   }
-
-  /* Bullets may split between items, never mid-item. */
   #cv-content li,
-  #cv-content .headercv,
   #cv-content .skills-list {
     break-inside: avoid;
     page-break-inside: avoid;
-  }
-
-  /* Tighter vertical rhythm — fewer pages, fewer near-empty ones. */
-  #cv-content .headercv {
-    margin-bottom: 1.2rem;
-    padding-bottom: 0.9rem;
-  }
-  #cv-content h2 {
-    margin: 1.2rem 0 0.6rem;
-  }
-  #cv-content h3 {
-    margin: 0.9rem 0 0.1rem;
-  }
-  #cv-content li {
-    margin-bottom: 0.25rem;
-  }
-  #cv-content p {
-    margin-bottom: 0.5rem;
-  }
-  #cv-content h2,
-  #cv-content .cv-tagline {
-    color: #1f2937 !important;
-  }
-  #cv-content h3 + p a,
-  #cv-content a {
-    color: #000 !important;
-  }
-  #cv-content ul li::before {
-    background: #000 !important;
   }
 }
