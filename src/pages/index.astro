@@ -2,98 +2,45 @@
 import Layout from "../layouts/Layout.astro";
 import Sobremi from "../content/posts/sobremi.mdx";
 import Header from "../components/Header.astro";
-import "../../css/styles.css";
 ---
 
-<Layout title="CV Daniel Manosalva">
-  <div class="min-h-screen bg-gray-50">
-    <Header />
-    
-    <main class="max-w-4xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
-      <!-- Botón de impresión -->
-      <div class="flex justify-end mb-6">
-        <button 
-          class="print-button flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200 shadow-sm"
-          aria-label="Imprimir CV"
-        >
-          <span class="iconify" data-icon="tdesign:print"></span>
-          <span>Imprimir CV</span>
-        </button>
-      </div>
+<Layout title="Daniel Manosalva — Lead Developer & CV">
+  <Header />
 
-      <!-- Contenedor del CV -->
-      <article id="sobremi" class="bg-white shadow-lg rounded-lg p-8 print:shadow-none print:p-0">
-        <div id="cv-content" class="prose max-w-none">
-          <Sobremi />
-        </div>
-      </article>
-    </main>
-  </div>
+  <main class="mx-auto max-w-4xl px-4 py-10 sm:px-6 lg:px-8 print:max-w-none print:px-0 print:py-0">
+    <!-- Toolbar -->
+    <div class="mb-6 flex flex-wrap items-end justify-between gap-4 print:hidden">
+      <div>
+        <p class="text-xs font-semibold uppercase tracking-widest text-indigo-600 dark:text-indigo-400">
+          Curriculum Vitae
+        </p>
+        <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">
+          Last updated July 2026
+        </p>
+      </div>
+      <button
+        id="print-button"
+        class="inline-flex items-center gap-2 rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-indigo-700 focus-visible:outline-none active:scale-[.98]"
+        aria-label="Print or save this CV as PDF"
+      >
+        <span class="iconify text-base" data-icon="tdesign:print"></span>
+        <span>Print / Save PDF</span>
+      </button>
+    </div>
+
+    <!-- CV card -->
+    <article
+      class="rounded-xl border border-slate-200 bg-white p-8 sm:p-10 dark:border-slate-800 dark:bg-[#1b1e1c] print:rounded-none print:border-0 print:bg-white print:p-0"
+    >
+      <div id="cv-content">
+        <Sobremi />
+      </div>
+    </article>
+  </main>
 </Layout>
 
-<style>
-  /* Estilos específicos para impresión */
-  @media print {
-    .print-button {
-      display: none;
-    }
-    
-    main {
-      padding: 0 !important;
-      margin: 0 !important;
-    }
-
-    article {
-      padding: 0 !important;
-    }
-  }
-
-  /* Estilos para el contenido Markdown */
-  :global(.prose h1) {
-    @apply text-3xl font-bold text-gray-900 mb-4;
-  }
-
-  :global(.prose h2) {
-    @apply text-2xl font-semibold text-gray-800 mt-8 mb-4 border-b border-gray-200 pb-2;
-  }
-
-  :global(.prose a) {
-    @apply text-blue-600 hover:text-blue-800 transition-colors duration-200;
-  }
-
-  :global(.headercv) {
-    @apply mb-8;
-  }
-
-  :global(.contact-info) {
-    @apply flex flex-wrap gap-3 text-gray-600 mt-4;
-  }
-
-  :global(.contact-info span) {
-    @apply flex items-center gap-2;
-  }
-
-  :global(.contact-info a) {
-    @apply hover:text-blue-600 transition-colors duration-200;
-  }
-</style>
-
 <script>
-  const printButton = document.querySelector(".print-button");
-  printButton.addEventListener("click", () => {
-    const printContent = document.querySelector("#sobremi").innerHTML;
-    const originalContent = document.body.innerHTML;
-    document.body.innerHTML = printContent;
+  document.getElementById("print-button")?.addEventListener("click", () => {
     window.print();
-    document.body.innerHTML = originalContent;
-    
-    // Reattach event listener after restoring content
-    document.querySelector(".print-button").addEventListener("click", () => {
-      const printContent = document.querySelector("#sobremi").innerHTML;
-      const originalContent = document.body.innerHTML;
-      document.body.innerHTML = printContent;
-      window.print();
-      document.body.innerHTML = originalContent;
-    });
   });
 </script>

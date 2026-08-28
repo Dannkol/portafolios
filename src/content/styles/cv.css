@@ -1,167 +1,277 @@
-/* Backbone CSS for Resume Template 1 */
+/* CV content styles — scoped to #cv-content (only rendered on the index page). */
 
-.headercv {
-  text-align: center;
-  padding: 20px;
-  border-radius: 10px;
+#cv-content {
+  color: #334155; /* slate-700 */
+  line-height: 1.6;
+  font-size: 0.95rem;
 }
 
-.headercv h1 {
-  margin: 0;
-  font-size: 2em;
-  color: #333;
+/* Header block */
+#cv-content .headercv {
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #e2e8f0; /* slate-200 */
 }
 
-.contact-info {
-  margin-top: 10px;
-  font-size: 0.9em;
-  color: #666;
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.contact-info span {
-  margin: 0 5px;
-}
-
-.contact-info a {
-  color: #0066cc;
-  text-decoration: underline;
-}
-
-.contact-info a:hover {
-  text-decoration: underline;
-}
-
-.iconify {
-  vertical-align: middle;
-  margin-right: 5px;
-}
-
-/* Basic */
-
-p,
-li,
-dl {
+#cv-content .headercv h1 {
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #0f172a; /* slate-900 */
   margin: 0;
 }
 
-/* Headings */
-
-h1,
-h2,
-h3 {
-  font-weight: bold;
+#cv-content .cv-tagline {
+  margin: 0.35rem 0 0.9rem;
+  color: #567761; /* accent */
+  font-weight: 600;
+  font-size: 0.9rem;
 }
 
-h1 {
-  font-size: 2.13em;
+#cv-content .contact-info {
+  font-size: 0.85rem;
+  color: #64748b; /* slate-500 */
 }
 
-h2,
-h3 {
-  margin-bottom: 5px;
-  font-size: 1.2em;
+#cv-content .contact-info .cv-sep {
+  color: #cbd5e1; /* slate-300 */
 }
 
-h2 {
-  border-bottom-style: solid;
-  border-bottom-width: 1px;
+#cv-content .contact-info a {
+  color: #475569; /* slate-600 */
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+#cv-content .contact-info a:hover {
+  color: #567761;
+  text-decoration: underline;
+}
+
+/* Section headings */
+#cv-content h2 {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #567761; /* accent */
+  margin: 2rem 0 1rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+#cv-content h2:first-of-type {
+  margin-top: 0;
+}
+
+/* Role / institution titles */
+#cv-content h3 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 1.4rem 0 0.1rem;
+}
+
+#cv-content h3 a {
+  color: inherit;
+  text-decoration: none;
+}
+
+#cv-content h3 a:hover {
+  color: #567761;
+  text-decoration: underline;
+}
+
+/* Meta line (org · dates) sits directly after a role title */
+#cv-content h3 + p {
+  margin: 0 0 0.5rem;
+  font-size: 0.85rem;
+  color: #64748b;
+  font-weight: 500;
+}
+
+#cv-content h3 + p a {
+  color: #567761;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+#cv-content h3 + p a:hover {
+  text-decoration: underline;
+}
+
+/* Body copy + links */
+#cv-content p {
+  margin: 0 0 0.75rem;
+}
+
+#cv-content a {
+  color: #567761;
+  text-decoration: underline;
+  text-underline-offset: 2px;
 }
 
 /* Lists */
-
-ul,
-ol {
-  padding-left: 1.5em;
-  margin: 0.2em 0;
+#cv-content ul {
+  list-style: none;
+  padding: 0;
+  margin: 0.4rem 0 0.75rem;
 }
 
-ul {
-  list-style-type: circle;
+#cv-content ul li {
+  position: relative;
+  padding-left: 1.15rem;
+  margin-bottom: 0.4rem;
 }
 
-ol {
-  list-style-type: decimal;
+#cv-content ul li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.6em;
+  width: 5px;
+  height: 5px;
+  border-radius: 9999px;
+  background: #abc2b1; /* indigo-300 */
 }
 
-/* Definition Lists */
-
-dl {
-  display: flex;
+/* Skills icon row */
+#cv-content .skills-list {
+  margin: 0.5rem 0 1rem;
+  font-size: 0.9rem;
+  color: #334155;
 }
 
-dl dt,
-dl dd:not(:last-child) {
-  flex: 1;
+#cv-content .skills-list .iconify {
+  font-size: 1.15rem;
 }
 
-/* Tex */
-
-:not(span.katex-display) > span.katex {
+/* KaTeX guard */
+#cv-content :not(span.katex-display) > span.katex {
   font-size: 1em !important;
 }
 
-/* SVG & Images */
-
-svg.iconify {
-  vertical-align: -0.2em;
+/* Dark mode */
+html.dark {
+  #cv-content {
+    color: #cbd5e1;
+  }
+  #cv-content .headercv,
+  #cv-content h2 {
+    border-color: #1e293b; /* slate-800 */
+  }
+  #cv-content .headercv h1,
+  #cv-content h3 {
+    color: #f1f5f9;
+  }
+  #cv-content .cv-tagline {
+    color: #abc2b1;
+  }
+  #cv-content .contact-info {
+    color: #94a3b8;
+  }
+  #cv-content .contact-info .cv-sep {
+    color: #475569;
+  }
+  #cv-content .contact-info a {
+    color: #cbd5e1;
+  }
+  #cv-content h2 {
+    color: #abc2b1;
+  }
+  #cv-content h3 + p {
+    color: #94a3b8;
+  }
+  #cv-content h3 + p a,
+  #cv-content a {
+    color: #abc2b1;
+  }
+  #cv-content ul li::before {
+    background: #6f9078;
+  }
+  #cv-content .skills-list {
+    color: #cbd5e1;
+  }
 }
 
-img {
-  max-width: 100%;
-}
-
-/* headercv */
-
-.resume-headercv {
-  text-align: center;
-}
-
-.resume-headercv h1 {
-  text-align: center;
-  line-height: 1;
-  margin-bottom: 8px;
-}
-
-.resume-headercv-item:not(.no-separator)::after {
-  content: " | ";
-}
-
-/* Citations */
-
-ul.crossref-list {
-  padding-left: 1.2em;
-}
-
-li.crossref-item p {
-  margin-left: 0.5em;
-}
-
-li.crossref-item::marker {
-  content: attr(data-caption);
-}
-
-sup.crossref-ref {
-  font-size: 100%;
-  top: 0;
-}
-
-/* Dark & print mode */
-
-.dark {
-  background-color: #334155;
-  color: #e5e7eb;
+/* Print — clean black-on-white, compact, no color surfaces */
+@page {
+  size: A4;
+  margin: 14mm 15mm;
 }
 
 @media print {
-   * {
-    background-color: white !important;
-    color: black !important;
+  #cv-content,
+  #cv-content * {
+    color: #000 !important;
+    background: transparent !important;
   }
 
-  .dark a {
-    color: black !important;
+  /* Page-break control: never strand a heading, a meta line or a stray
+     line of text at the bottom / top of a page. */
+  #cv-content {
+    font-size: 0.88rem;
+    line-height: 1.45;
+    orphans: 3;
+    widows: 3;
+  }
+
+  /* A section heading must carry at least its first entry with it. */
+  #cv-content h2,
+  #cv-content h3 {
+    break-inside: avoid;
+    break-after: avoid;
+    page-break-inside: avoid;
+    page-break-after: avoid;
+  }
+
+  /* "org · dates" line is glued to the h3 above and the bullets below. */
+  #cv-content h3 + p {
+    break-before: avoid;
+    break-after: avoid;
+    page-break-before: avoid;
+    page-break-after: avoid;
+  }
+
+  #cv-content ul {
+    break-before: avoid;
+    page-break-before: avoid;
+  }
+
+  /* Bullets may split between items, never mid-item. */
+  #cv-content li,
+  #cv-content .headercv,
+  #cv-content .skills-list {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  /* Tighter vertical rhythm — fewer pages, fewer near-empty ones. */
+  #cv-content .headercv {
+    margin-bottom: 1.2rem;
+    padding-bottom: 0.9rem;
+  }
+  #cv-content h2 {
+    margin: 1.2rem 0 0.6rem;
+  }
+  #cv-content h3 {
+    margin: 0.9rem 0 0.1rem;
+  }
+  #cv-content li {
+    margin-bottom: 0.25rem;
+  }
+  #cv-content p {
+    margin-bottom: 0.5rem;
+  }
+  #cv-content h2,
+  #cv-content .cv-tagline {
+    color: #1f2937 !important;
+  }
+  #cv-content h3 + p a,
+  #cv-content a {
+    color: #000 !important;
+  }
+  #cv-content ul li::before {
+    background: #000 !important;
   }
 }

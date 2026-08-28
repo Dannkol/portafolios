@@ -1,9 +1,69 @@
 ---
+const path = Astro.url.pathname.replace(/\/+$/, "") || "/";
+const isResume = path === "/";
+const isBlog = !isResume;
 
-import './styles/header.css';
+const linkBase =
+  "rounded-full px-4 py-1.5 text-sm font-medium transition-colors outline-none";
+const active = "bg-indigo-600 text-white";
+const idle =
+  "text-slate-600 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white";
 ---
 
-<div class="header">
-  <button onclick="location.href='/'">Resume</button>
-  <button onclick="location.href='/blog'">Blog</button>
-</div>
+<header class="sticky top-0 z-40 px-4 pt-4 print:hidden">
+  <nav
+    class="mx-auto flex w-full max-w-lg items-center justify-between gap-2 rounded-full border border-slate-200 bg-white px-3 py-2 dark:border-slate-800 dark:bg-[#1b1e1c]"
+    aria-label="Primary"
+  >
+    <a
+      href="/"
+      class="flex h-9 w-9 items-center justify-center overflow-hidden rounded-full outline-none ring-2 ring-indigo-600 transition hover:ring-indigo-700"
+      aria-label="Daniel Manosalva — home"
+    >
+      <img
+        src="https://github.com/Dannkol.png?size=96"
+        alt="Daniel Manosalva"
+        width="36"
+        height="36"
+        class="h-full w-full object-cover"
+        loading="eager"
+      />
+    </a>
+
+    <div class="flex items-center gap-1">
+      <a
+        href="/"
+        class={`${linkBase} ${isResume ? active : idle}`}
+        aria-current={isResume ? "page" : undefined}
+      >
+        Resume
+      </a>
+      <a
+        href="/blog"
+        class={`${linkBase} ${isBlog ? active : idle}`}
+        aria-current={isBlog ? "page" : undefined}
+      >
+        Blog
+      </a>
+    </div>
+
+    <button
+      id="theme-toggle"
+      type="button"
+      aria-label="Toggle dark mode"
+      class="ml-1 flex h-9 w-9 items-center justify-center rounded-full text-slate-600 outline-none transition-colors hover:bg-slate-100 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-slate-100"
+    >
+      <span class="iconify text-lg dark:hidden" data-icon="tabler:moon"></span>
+      <span class="iconify hidden text-lg dark:inline" data-icon="tabler:sun"></span>
+    </button>
+  </nav>
+</header>
+
+<script>
+  document.getElementById("theme-toggle")?.addEventListener("click", () => {
+    const dark = document.documentElement.classList.toggle("dark");
+    try {
+      localStorage.setItem("theme", dark ? "dark" : "light");
+    } catch (e) {}
+  });
+</script>

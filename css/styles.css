@@ -1,98 +1,128 @@
-@import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&display=swap');
+/*
+ * Blog-post reading surface.
+ * Imported by src/pages/[slug].astro and src/pages/blog/[slug].astro.
+ * All prose defaults use :where() (zero specificity) so any post that ships
+ * its own Tailwind utility classes (e.g. proyectos.mdx) always wins.
+ */
 
-
-* {
-  background-color: white;
-  color: black;
-  text-align: justify;
-  -moz-hyphens: auto;
-  -ms-hyphens: auto;
-  -webkit-hyphens: auto;
-  hyphens: auto;
+.post-prose {
+  color: #334155; /* slate-700 */
+  line-height: 1.7;
 }
 
-.outer-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  width: 100%;
-  height: 100%;
-}
-
-.centered-container {
-  width: 80%; /* Puedes ajustar este valor según sea necesario */
-  max-width: 100wh; /* Máximo ancho del contenedor */
-  height: 80%; /* Ajusta la altura según sea necesario */
-  max-height: 80vh; /* Máxima altura del contenedor */
-  padding: 20px;
-  background-color: #fff;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  overflow-y: auto; /* Permite desplazamiento vertical si el contenido es mayor al contenedor */
-}
-
-@media (max-width: 768px) {
-  .centered-container {
-    width: 90%;
-    height: auto; /* Ajusta para pantallas más pequeñas */
-  }
-}
-
-/* Estilos adicionales para el contenido */
-h1, h2, h3 {
-  color: #333;
-  font-family: "Newsreader", serif;
-  font-optical-sizing: auto;
-  font-weight: 400;
-  font-style: normal;
-}
-
-h1 {
-  text-align: center;
-  margin-bottom: 20px;
-  font-family: "Newsreader", serif;
-  font-optical-sizing: auto;
+.post-prose :where(h1) {
+  font-size: 2.25rem;
   font-weight: 800;
-  font-style: normal;
+  letter-spacing: -0.02em;
+  color: #0f172a;
+  margin: 0 0 1rem;
+  line-height: 1.15;
 }
 
-h2 {
-  border-bottom: 2px solid #333;
-  padding-bottom: 5px;
+.post-prose :where(h2) {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 2.25rem 0 1rem;
 }
 
-h3 {
-  margin-top: 20px;
+.post-prose :where(h3) {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 1.75rem 0 0.75rem;
 }
 
-ul {
-  list-style-type: none;
-  padding: 0;
+.post-prose :where(p) {
+  margin: 0 0 1.1rem;
 }
 
-li {
-  margin-bottom: 10px;
-  font-family: "Newsreader", serif;
-  font-optical-sizing: auto;
-  font-weight: 400;
-  font-style: normal;
-}
-
-a {
-  color: #0066cc;
-  text-decoration:underline;
-  font-family: "Newsreader", serif;
-  font-optical-sizing: auto;
-  font-weight: 400;
-  font-style: normal;
-}
-
-a:hover {
+.post-prose :where(a) {
+  color: #567761;
   text-decoration: underline;
+  text-underline-offset: 2px;
 }
 
+.post-prose :where(a:hover) {
+  color: #45604e;
+}
 
-.print {
-  position: fixed;
+.post-prose :where(ul, ol) {
+  margin: 0 0 1.1rem;
+  padding-left: 1.4rem;
+}
+
+.post-prose :where(ul) {
+  list-style: disc;
+}
+
+.post-prose :where(ol) {
+  list-style: decimal;
+}
+
+.post-prose :where(li) {
+  margin-bottom: 0.4rem;
+}
+
+.post-prose :where(blockquote) {
+  border-left: 3px solid #abc2b1;
+  padding-left: 1rem;
+  margin: 1.25rem 0;
+  color: #475569;
+  font-style: italic;
+}
+
+.post-prose :where(img) {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.75rem;
+}
+
+.post-prose :where(hr) {
+  border: 0;
+  border-top: 1px solid #e2e8f0;
+  margin: 2rem 0;
+}
+
+/* Inline code (shiki blocks keep their own inline dracula styles). */
+.post-prose :where(:not(pre) > code) {
+  background: #e3ebe5;
+  color: #45604e;
+  padding: 0.15em 0.4em;
+  border-radius: 0.35rem;
+  font-size: 0.9em;
+}
+
+.post-prose :where(pre) {
+  overflow-x: auto;
+  border-radius: 0.75rem;
+  padding: 1rem 1.25rem;
+  margin: 1.25rem 0;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+html.dark {
+  .post-prose {
+    color: #cbd5e1;
+  }
+  .post-prose :where(h1, h2, h3) {
+    color: #f1f5f9;
+  }
+  .post-prose :where(a) {
+    color: #abc2b1;
+  }
+  .post-prose :where(a:hover) {
+    color: #c7d2fe;
+  }
+  .post-prose :where(blockquote) {
+    color: #94a3b8;
+  }
+  .post-prose :where(hr) {
+    border-color: #1e293b;
+  }
+  .post-prose :where(:not(pre) > code) {
+    background: #1e1b4b;
+    color: #c7d2fe;
+  }
 }

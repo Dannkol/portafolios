@@ -1,52 +1,174 @@
 ---
 interface Props {
 	title: string;
+	description?: string;
 }
 
-const { title } = Astro.props;
+const {
+	title,
+	description = "Daniel Manosalva — Lead Developer building AI clones, RAG chatbots and full-stack products. CV, projects and blog.",
+} = Astro.props;
 ---
 
 <!doctype html>
 <html lang="en">
 	<head>
+		<script is:inline>
+			// Set theme before paint to avoid flash. Default: follow system.
+			(function () {
+				try {
+					var t = localStorage.getItem("theme");
+					if (t === "dark" || (!t && matchMedia("(prefers-color-scheme: dark)").matches)) {
+						document.documentElement.classList.add("dark");
+					}
+				} catch (e) {}
+			})();
+		</script>
 		<meta charset="UTF-8" />
-		<meta name="description" content="Astro description" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="description" content={description} />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="icon" type="image/png" href="https://github.com/Dannkol.png?size=64" />
 		<meta name="generator" content={Astro.generator} />
+		<meta name="theme-color" content="#f6f7f4" />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:type" content="website" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..700&display=swap"
+			rel="stylesheet"
+		/>
 		<script src="https://code.iconify.design/2/2.0.3/iconify.min.js"></script>
+		<style is:inline type="text/tailwindcss">
+			@import "tailwindcss";
+			/* Manual dark mode: `dark:` utilities respond to a .dark class, not the OS. */
+			@custom-variant dark (&:where(.dark, .dark *));
+			/* ponytail: the whole site is themed by remapping Tailwind's indigo scale
+			   to a solid pastel sage — one edit instead of rewriting ~50 utility
+			   classes across 9 files. Rename the classes only if a 2nd accent shows up. */
+			@theme {
+				--color-indigo-50: #f2f5f2;
+				--color-indigo-100: #e3ebe5;
+				--color-indigo-200: #cbdacf;
+				--color-indigo-300: #abc2b1;
+				--color-indigo-400: #8caa94;
+				--color-indigo-500: #6f9078;
+				--color-indigo-600: #567761;
+				--color-indigo-700: #45604e;
+				--color-indigo-800: #374d3f;
+				--color-indigo-900: #2a3a31;
+				--color-indigo-950: #18211b;
+			}
+		</style>
 		<script src="https://unpkg.com/@tailwindcss/browser@4"></script>
 		<title>{title}</title>
 	</head>
-	<body>
+	<body class="antialiased">
+		<noscript><style>#loader { display: none; }</style></noscript>
+		<div id="loader" aria-hidden="true"><div class="spinner"></div></div>
+		<script is:inline>
+			window.addEventListener("load", function () {
+				document.body.classList.add("loaded");
+			});
+		</script>
+		<div class="parallax-bg" aria-hidden="true"></div>
 		<slot />
 	</body>
 </html>
 <style is:global>
 	:root {
-		--accent: 136, 58, 234;
-		--accent-light: 224, 204, 250;
-		--accent-dark: 49, 10, 101;
-		--accent-gradient: linear-gradient(
-			45deg,
-			rgb(var(--accent)),
-			rgb(var(--accent-light)) 30%,
-			white 60%
-		);
+		/* Single accent — pastel sage. Used across nav, links, buttons, tags. */
+		--accent: 86, 119, 97; /* #567761 */
+		--accent-strong: 69, 96, 78; /* #45604e */
+		--accent-soft: 227, 235, 229; /* #e3ebe5 */
+		--surface: #f6f7f4;
+		--surface-dark: #141715;
 	}
+
 	html {
-		font-family: system-ui, sans-serif;
-		background-size: 224px;
-	}
-	code {
 		font-family:
-			Menlo,
-			Monaco,
-			Lucida Console,
-			Liberation Mono,
-			DejaVu Sans Mono,
-			Bitstream Vera Sans Mono,
-			Courier New,
-			monospace;
+			"Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+		scroll-behavior: smooth;
+		-webkit-text-size-adjust: 100%;
+	}
+
+	body {
+		color: #0f172a; /* slate-900 */
+		margin: 0;
+		min-height: 100vh;
+	}
+
+	/* Page load animation — plain CSS so it shows before the Tailwind CDN compiles. */
+	#loader {
+		position: fixed;
+		inset: 0;
+		z-index: 100;
+		display: grid;
+		place-items: center;
+		background-color: var(--surface);
+		transition: opacity 0.4s ease, visibility 0.4s ease;
+	}
+	html.dark #loader {
+		background-color: var(--surface-dark);
+	}
+	body.loaded #loader {
+		opacity: 0;
+		visibility: hidden;
+	}
+	#loader .spinner {
+		width: 42px;
+		height: 42px;
+		border-radius: 50%;
+		border: 3px solid rgb(var(--accent) / 0.2);
+		border-top-color: rgb(var(--accent));
+		animation: loader-spin 0.7s linear infinite;
+	}
+	@keyframes loader-spin {
+		to {
+			transform: rotate(360deg);
+		}
+	}
+	@media (prefers-reduced-motion: reduce) {
+		#loader .spinner {
+			animation: none;
+		}
+	}
+
+	/* Flat pastel backdrop. ponytail: solid color, no gradients, no parallax. */
+	.parallax-bg {
+		position: fixed;
+		inset: 0;
+		z-index: -10;
+		pointer-events: none;
+		background: var(--surface);
+	}
+
+	code,
+	pre {
+		font-family:
+			ui-monospace, "SF Mono", Menlo, Monaco, "Liberation Mono",
+			"DejaVu Sans Mono", "Courier New", monospace;
+	}
+
+	::selection {
+		background-color: rgb(var(--accent) / 0.22);
+	}
+
+	/* Consistent, visible keyboard focus everywhere. */
+	:focus-visible {
+		outline: 2px solid rgb(var(--accent));
+		outline-offset: 2px;
+		border-radius: 4px;
+	}
+
+	html.dark body {
+		color: #e2e8f0; /* slate-200 */
+	}
+	html.dark .parallax-bg {
+		background: var(--surface-dark);
+	}
+	html.dark :focus-visible {
+		outline-color: #abc2b1;
 	}
 </style>

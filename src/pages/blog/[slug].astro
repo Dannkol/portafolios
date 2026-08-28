@@ -1,23 +1,17 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import Header from "../../components/Header.astro";
-import "../../../css/styles.css";  // Ajusta esta ruta según tu estructura
+import "../../../css/styles.css";
 
 export async function getStaticPaths() {
-  // Actualizamos la ruta para que busque en content/posts
-  const posts = await Astro.glob("../../posts/**/*.mdx");
-  
-  console.log("Posts encontrados:", posts.map(post => ({
-    title: post.frontmatter.title,
-    slug: post.frontmatter.slug
-  })));
+  const posts = Object.values(import.meta.glob("../../posts/**/*.mdx", { eager: true })) as any[];
 
-  return posts.map((post) => ({
-    params: { 
+  return posts.map((post: any) => ({
+    params: {
       slug: post.frontmatter.slug
     },
-    props: { 
-      post 
+    props: {
+      post
     }
   }));
 }
@@ -25,13 +19,16 @@ export async function getStaticPaths() {
 const { Content, frontmatter } = Astro.props.post;
 ---
 
-<Layout title={frontmatter.title}>
-  <div class="outer-container">
-    <Header />
-    <div class="centered-container">
-      <article>
-        <Content />
-      </article>
-    </div>
-  </div>
+<Layout title={frontmatter.title} description={frontmatter.excerpt}>
+  <Header />
+  <main class="post-prose mx-auto max-w-3xl px-4 py-10 sm:px-6 lg:px-8">
+    <a
+      href="/blog"
+      class="mb-8 inline-flex items-center gap-1.5 text-sm font-medium text-slate-500 transition-colors hover:text-indigo-600 dark:text-slate-400 dark:hover:text-indigo-400"
+    >
+      <span class="iconify text-base" data-icon="tabler:arrow-left"></span>
+      Back to blog
+    </a>
+    <article><Content /></article>
+  </main>
 </Layout>
