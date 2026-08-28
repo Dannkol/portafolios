@@ -1,7 +1,17 @@
 ---
+import { Icon } from "astro-icon/components";
+import { langFromPath, alternatePath, UI } from "./utils/i18n";
+
 const path = Astro.url.pathname.replace(/\/+$/, "") || "/";
-const isResume = path === "/";
+const isResume = path === "/" || path === "/es";
 const isBlog = !isResume;
+
+const lang = langFromPath(Astro.url.pathname);
+const t = UI[lang];
+const alt = alternatePath(Astro.url.pathname);
+// Home and Blog links should stay in the current language.
+const homeHref = lang === "es" ? "/es" : "/";
+const blogHref = lang === "es" ? "/es/blog" : "/blog";
 
 const linkBase =
   "rounded-full px-4 py-1.5 text-sm font-medium transition-colors outline-none";
@@ -16,7 +26,7 @@ const idle =
     aria-label="Primary"
   >
     <a
-      href="/"
+      href={homeHref}
       class="flex h-9 w-9 items-center justify-center overflow-hidden rounded-full outline-none ring-2 ring-indigo-600 transition hover:ring-indigo-700"
       aria-label="Daniel Manosalva — home"
     >
@@ -32,18 +42,28 @@ const idle =
 
     <div class="flex items-center gap-1">
       <a
-        href="/"
+        href={alt}
+        id="lang-toggle"
+        aria-label={t.switchLangAria}
+        hreflang={lang === "es" ? "en" : "es"}
+        class="flex h-9 items-center gap-1 rounded-full px-3 text-sm font-medium text-slate-600 outline-none transition-colors hover:bg-slate-100 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-slate-100"
+      >
+        <Icon name="tabler:language" width="1em" height="1em" class="text-base" />
+        <span>{t.switchLang}</span>
+      </a>
+      <a
+        href={homeHref}
         class={`${linkBase} ${isResume ? active : idle}`}
         aria-current={isResume ? "page" : undefined}
       >
-        Resume
+        {t.resume}
       </a>
       <a
-        href="/blog"
+        href={blogHref}
         class={`${linkBase} ${isBlog ? active : idle}`}
         aria-current={isBlog ? "page" : undefined}
       >
-        Blog
+        {t.blog}
       </a>
     </div>
 
@@ -53,8 +73,8 @@ const idle =
       aria-label="Toggle dark mode"
       class="ml-1 flex h-9 w-9 items-center justify-center rounded-full text-slate-600 outline-none transition-colors hover:bg-slate-100 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-slate-100"
     >
-      <span class="iconify text-lg dark:hidden" data-icon="tabler:moon"></span>
-      <span class="iconify hidden text-lg dark:inline" data-icon="tabler:sun"></span>
+      <Icon name="tabler:moon" width="1em" height="1em" class="text-lg dark:hidden" />
+      <Icon name="tabler:sun" width="1em" height="1em" class="hidden text-lg dark:inline" />
     </button>
   </nav>
 </header>

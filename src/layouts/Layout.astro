@@ -1,17 +1,34 @@
 ---
+import "../styles/global.css";
+import { langFromPath, alternatePath, type Lang } from "../components/utils/i18n";
+
 interface Props {
 	title: string;
 	description?: string;
+	ogImage?: string;
+	lang?: Lang;
 }
 
 const {
 	title,
 	description = "Daniel Manosalva — Lead Developer building AI clones, RAG chatbots and full-stack products. CV, projects and blog.",
+	ogImage,
 } = Astro.props;
+
+// The URL is the source of truth for language (English at root, Spanish under /es).
+const lang: Lang = Astro.props.lang ?? langFromPath(Astro.url.pathname);
+const site = Astro.site ?? new URL(Astro.request.url);
+// The other-language counterpart of the current path.
+const otherPath = alternatePath(Astro.url.pathname);
+const enPath = lang === "en" ? Astro.url.pathname : otherPath;
+const esPath = lang === "es" ? Astro.url.pathname : otherPath;
+// Normalize to a trailing slash (root stays "/") so canonical and hreflang match.
+const abs = (p: string) => new URL(p.endsWith("/") ? p : p + "/", site).toString();
+const canonical = abs(Astro.url.pathname);
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
 	<head>
 		<script is:inline>
 			// Set theme before paint to avoid flash. Default: follow system.
@@ -30,38 +47,21 @@ const {
 		<link rel="icon" type="image/png" href="https://github.com/Dannkol.png?size=64" />
 		<meta name="generator" content={Astro.generator} />
 		<meta name="theme-color" content="#f6f7f4" />
+		<link rel="canonical" href={canonical} />
+		<link rel="alternate" hreflang="en" href={abs(enPath)} />
+		<link rel="alternate" hreflang="es" href={abs(esPath)} />
+		<link rel="alternate" hreflang="x-default" href={abs(enPath)} />
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
 		<meta property="og:type" content="website" />
+		<meta property="og:locale" content={lang === "es" ? "es_CO" : "en_US"} />
+		{ogImage && <meta property="og:image" content={ogImage} />}
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link
 			href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..700&display=swap"
 			rel="stylesheet"
 		/>
-		<script src="https://code.iconify.design/2/2.0.3/iconify.min.js"></script>
-		<style is:inline type="text/tailwindcss">
-			@import "tailwindcss";
-			/* Manual dark mode: `dark:` utilities respond to a .dark class, not the OS. */
-			@custom-variant dark (&:where(.dark, .dark *));
-			/* ponytail: the whole site is themed by remapping Tailwind's indigo scale
-			   to a solid pastel sage — one edit instead of rewriting ~50 utility
-			   classes across 9 files. Rename the classes only if a 2nd accent shows up. */
-			@theme {
-				--color-indigo-50: #f2f5f2;
-				--color-indigo-100: #e3ebe5;
-				--color-indigo-200: #cbdacf;
-				--color-indigo-300: #abc2b1;
-				--color-indigo-400: #8caa94;
-				--color-indigo-500: #6f9078;
-				--color-indigo-600: #567761;
-				--color-indigo-700: #45604e;
-				--color-indigo-800: #374d3f;
-				--color-indigo-900: #2a3a31;
-				--color-indigo-950: #18211b;
-			}
-		</style>
-		<script src="https://unpkg.com/@tailwindcss/browser@4"></script>
 		<title>{title}</title>
 	</head>
 	<body class="antialiased">

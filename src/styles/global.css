@@ -1,0 +1,21 @@
+@import "tailwindcss";
+
+/* Manual dark mode: `dark:` utilities respond to a .dark class, not the OS. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* The whole site is themed by remapping Tailwind's indigo scale
+   to a solid pastel sage — one edit instead of rewriting ~50 utility
+   classes across the site. */
+@theme {
+  --color-indigo-50: #f2f5f2;
+  --color-indigo-100: #e3ebe5;
+  --color-indigo-200: #cbdacf;
+  --color-indigo-300: #abc2b1;
+  --color-indigo-400: #8caa94;
+  --color-indigo-500: #6f9078;
+  --color-indigo-600: #567761;
+  --color-indigo-700: #45604e;
+  --color-indigo-800: #374d3f;
+  --color-indigo-900: #2a3a31;
+  --color-indigo-950: #18211b;
+}

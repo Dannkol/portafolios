@@ -1,0 +1,15 @@
+---
+import PostPage from "../../../components/PostPage.astro";
+
+export async function getStaticPaths() {
+  const posts = Object.values(import.meta.glob("../../../posts/es/*.mdx", { eager: true })) as any[];
+  return posts.map((post: any) => ({
+    params: { slug: `${post.frontmatter.slug}` },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+---
+
+<PostPage lang="es" post={post} />

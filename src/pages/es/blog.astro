@@ -1,0 +1,7 @@
+---
+import BlogListing from "../../components/BlogListing.astro";
+
+const posts = Object.values(import.meta.glob("../../posts/es/*.mdx", { eager: true })) as any[];
+---
+
+<BlogListing lang="es" posts={posts} />

@@ -1,34 +1,17 @@
 ---
-import Layout from "../../layouts/Layout.astro";
-import Header from "../../components/Header.astro";
-import "../../../css/styles.css";
+import PostPage from "../../components/PostPage.astro";
 
 export async function getStaticPaths() {
-  const posts = Object.values(import.meta.glob("../../posts/**/*.mdx", { eager: true })) as any[];
-
-  return posts.map((post: any) => ({
-    params: {
-      slug: post.frontmatter.slug
-    },
-    props: {
-      post
-    }
-  }));
+  const posts = Object.values(import.meta.glob("../../posts/*.mdx", { eager: true })) as any[];
+  return posts
+    .filter((post: any) => post.frontmatter.lang !== "es")
+    .map((post: any) => ({
+      params: { slug: `${post.frontmatter.slug}` },
+      props: { post },
+    }));
 }
 
-const { Content, frontmatter } = Astro.props.post;
+const { post } = Astro.props;
 ---
 
-<Layout title={frontmatter.title} description={frontmatter.excerpt}>
-  <Header />
-  <main class="post-prose mx-auto max-w-3xl px-4 py-10 sm:px-6 lg:px-8">
-    <a
-      href="/blog"
-      class="mb-8 inline-flex items-center gap-1.5 text-sm font-medium text-slate-500 transition-colors hover:text-indigo-600 dark:text-slate-400 dark:hover:text-indigo-400"
-    >
-      <span class="iconify text-base" data-icon="tabler:arrow-left"></span>
-      Back to blog
-    </a>
-    <article><Content /></article>
-  </main>
-</Layout>
+<PostPage lang="en" post={post} />

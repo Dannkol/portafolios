@@ -1,0 +1,143 @@
+---
+title: "Nexora IoT UI - The Realtime Hackathon"
+slug: "hackathon_portal_nexora"
+lang: "en"
+date: "2026-08-10"
+excerpt: "3rd place at The Realtime Hackathon (Portal × Crafter Station). We built nexora-iot-ui: React components for industrial IoT dashboards with realtime telemetry and commands, no backend required."
+category: "Projects"
+tags: ["hackathon", "IoT", "react", "realtime", "npm"]
+coverImage: "https://raw.githubusercontent.com/Camilo959/nexora-ui/main/assets/nexora.png"
+---
+
+import { Icon } from "astro-icon/components"
+
+
+<div class="space-y-10">
+  {/* Header y metadata */}
+  <div class="space-y-6">
+    <div class="flex flex-wrap items-center justify-center gap-4 text-sm text-slate-500 dark:text-slate-400">
+      <span class="flex items-center gap-1.5">
+        <Icon name="heroicons:calendar" width="1em" height="1em" class="iconify" />
+        August 10, 2026
+      </span>
+      <span class="flex items-center gap-1.5">
+        <Icon name="heroicons:folder" width="1em" height="1em" class="iconify" />
+        Projects
+      </span>
+    </div>
+
+    <div class="space-y-6 text-center">
+      <h1 class="text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl dark:text-slate-100">Nexora IoT UI</h1>
+      <div class="flex flex-wrap justify-center gap-2">
+        <span class="rounded-full bg-indigo-50 px-3 py-1 text-sm font-medium text-indigo-700 dark:bg-indigo-950 dark:text-indigo-300">#hackathon</span>
+        <span class="rounded-full bg-indigo-50 px-3 py-1 text-sm font-medium text-indigo-700 dark:bg-indigo-950 dark:text-indigo-300">#IoT</span>
+        <span class="rounded-full bg-indigo-50 px-3 py-1 text-sm font-medium text-indigo-700 dark:bg-indigo-950 dark:text-indigo-300">#react</span>
+        <span class="rounded-full bg-indigo-50 px-3 py-1 text-sm font-medium text-indigo-700 dark:bg-indigo-950 dark:text-indigo-300">#realtime</span>
+        <span class="rounded-full bg-indigo-50 px-3 py-1 text-sm font-medium text-indigo-700 dark:bg-indigo-950 dark:text-indigo-300">#npm</span>
+      </div>
+    </div>
+
+    <div class="relative mx-auto max-w-lg">
+      <img
+        src="https://raw.githubusercontent.com/Camilo959/nexora-ui/main/assets/nexora.png"
+        alt="Nexora logo"
+        class="mx-auto w-full rounded-2xl object-contain"
+      />
+    </div>
+  </div>
+
+  {/* Resultado */}
+  <section class="space-y-6">
+    <div class="rounded-r-lg border-l-4 border-indigo-500 bg-indigo-50 p-6 dark:bg-indigo-950/40">
+      <h2 class="mb-3 text-2xl font-bold text-indigo-900 dark:text-indigo-200">🥉 3rd place — The Realtime Hackathon</h2>
+      <p class="text-indigo-900/80 dark:text-indigo-200/80">
+        Together with my teammate <a href="https://github.com/Camilo959" class="font-semibold underline">Camilo Morales</a> (team <strong>Nexora Team</strong>), we took <strong>3rd place</strong> at <a href="https://hack.useportal.co/gallery" class="font-semibold underline">The Realtime Hackathon</a> by Portal × Crafter Station, competing against 35 projects built in 39 hours.
+      </p>
+    </div>
+  </section>
+
+  {/* Overview section */}
+  <section class="space-y-6">
+    <div class="rounded-r-lg border-l-4 border-indigo-500 bg-indigo-50 p-6 dark:bg-indigo-950/40">
+      <h2 class="mb-3 text-2xl font-bold text-indigo-900 dark:text-indigo-200">Overview</h2>
+      <p class="text-indigo-900/80 dark:text-indigo-200/80">
+        We built <a href="https://www.npmjs.com/package/nexora-iot-ui" class="font-semibold underline">nexora-iot-ui</a>, a library of React components for IoT and industrial dashboards with an optional data layer that wires them to a real device over Portal — <strong>no backend of your own</strong>. Telemetry and commands travel over a single realtime channel: the board publishes readings, the browser reads the same channel, and commands travel back the same way.
+      </p>
+    </div>
+
+    <p class="leading-relaxed text-slate-600 dark:text-slate-400">
+      The library is validated against real hardware: an ESP32 with a DHT11 sensor publishing temperature and humidity every 2 seconds, and a 28BYJ-48 stepper motor the panel can start and stop. The buttons read the device's state — not the click — and the panel marks data as stale when the board stops responding, because an open socket doesn't mean the hardware is alive.
+    </p>
+  </section>
+
+  {/* Features section */}
+  <section class="space-y-6">
+    <h2 class="text-2xl font-bold text-slate-900 dark:text-slate-100">What's inside</h2>
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <div class="rounded-xl border border-slate-200 bg-white p-6 dark:border-slate-800 dark:bg-slate-900">
+        <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-indigo-100 dark:bg-indigo-950">
+          <Icon name="heroicons:squares-2x2" width="1em" height="1em" class="iconify text-2xl text-indigo-600 dark:text-indigo-400" />
+        </div>
+        <h3 class="mb-2 text-lg font-semibold text-slate-900 dark:text-slate-100">9 UI components</h3>
+        <p class="text-sm text-slate-600 dark:text-slate-400">
+          TelemetryCard, GaugeCard, RealtimeChart, DeviceTable, CommandLog, ActuatorButton and more. Presentation only: everything comes in through props, no network logic.
+        </p>
+      </div>
+
+      <div class="rounded-xl border border-slate-200 bg-white p-6 dark:border-slate-800 dark:bg-slate-900">
+        <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-indigo-100 dark:bg-indigo-950">
+          <Icon name="heroicons:bolt" width="1em" height="1em" class="iconify text-2xl text-indigo-600 dark:text-indigo-400" />
+        </div>
+        <h3 class="mb-2 text-lg font-semibold text-slate-900 dark:text-slate-100">Realtime layer with Portal</h3>
+        <p class="text-sm text-slate-600 dark:text-slate-400">
+          Hooks like useTelemetry and useActuator connect the components to a real device in minutes. Ephemeral telemetry, one channel per device, and round-trip commands.
+        </p>
+      </div>
+
+      <div class="rounded-xl border border-slate-200 bg-white p-6 dark:border-slate-800 dark:bg-slate-900">
+        <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-indigo-100 dark:bg-indigo-950">
+          <Icon name="heroicons:cpu-chip" width="1em" height="1em" class="iconify text-2xl text-indigo-600 dark:text-indigo-400" />
+        </div>
+        <h3 class="mb-2 text-lg font-semibold text-slate-900 dark:text-slate-100">Tested with an ESP32</h3>
+        <p class="text-sm text-slate-600 dark:text-slate-400">
+          Full demo with a DHT11 sensor and a stepper motor: readings flowing from the board to the browser and commands back, over a single channel with no server in between.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  {/* Retos */}
+  <section class="space-y-6">
+    <h2 class="text-2xl font-bold text-slate-900 dark:text-slate-100">The most interesting challenge</h2>
+    <p class="leading-relaxed text-slate-600 dark:text-slate-400">
+      We discovered that Portal's official React SDK <strong>discards inbound ephemeral messages</strong> — exactly the channel telemetry travels on. We verified it against the live API and decided to implement Portal's wire protocol directly, isolating that layer in a single file so it can be swapped out once the SDK supports it. We preferred 400 lines of our own over a panel that pretends to be live.
+    </p>
+  </section>
+
+  {/* Footer con enlaces */}
+  <footer class="border-t border-slate-200 pt-8 dark:border-slate-800">
+    <div class="flex flex-wrap items-center justify-center gap-3">
+      <a
+        href="https://www.npmjs.com/package/nexora-iot-ui"
+        class="inline-flex items-center gap-2 rounded-lg bg-slate-900 px-6 py-3 text-sm font-semibold text-white no-underline transition-colors duration-300 hover:bg-slate-700 dark:bg-indigo-600 dark:hover:bg-indigo-500"
+      >
+        <Icon name="simple-icons:npm" width="1em" height="1em" class="iconify text-base" />
+        View on npm
+      </a>
+      <a
+        href="https://github.com/Camilo959/nexora-ui"
+        class="inline-flex items-center gap-2 rounded-lg bg-slate-900 px-6 py-3 text-sm font-semibold text-white no-underline transition-colors duration-300 hover:bg-slate-700 dark:bg-indigo-600 dark:hover:bg-indigo-500"
+      >
+        <Icon name="tabler:brand-github" width="1em" height="1em" class="iconify text-base" />
+        GitHub
+      </a>
+      <a
+        href="https://hack.useportal.co/gallery"
+        class="inline-flex items-center gap-2 rounded-lg bg-slate-900 px-6 py-3 text-sm font-semibold text-white no-underline transition-colors duration-300 hover:bg-slate-700 dark:bg-indigo-600 dark:hover:bg-indigo-500"
+      >
+        <Icon name="heroicons:trophy" width="1em" height="1em" class="iconify text-base" />
+        Hackathon results
+      </a>
+    </div>
+  </footer>
+</div>
