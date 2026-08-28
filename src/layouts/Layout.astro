@@ -44,9 +44,10 @@ const canonical = abs(Astro.url.pathname);
 		<meta charset="UTF-8" />
 		<meta name="description" content={description} />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<link rel="icon" type="image/png" href="https://github.com/Dannkol.png?size=64" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
-		<meta name="theme-color" content="#f6f7f4" />
+		<meta name="theme-color" media="(prefers-color-scheme: light)" content="#f6f7f4" />
+		<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#141715" />
 		<link rel="canonical" href={canonical} />
 		<link rel="alternate" hreflang="en" href={abs(enPath)} />
 		<link rel="alternate" hreflang="es" href={abs(esPath)} />

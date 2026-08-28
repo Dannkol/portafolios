@@ -3,38 +3,52 @@
 
 export type Lang = "en" | "es";
 
-export const UI: Record<Lang, Record<string, string>> = {
-  en: {
-    resume: "Resume",
-    blog: "Blog",
-    switchLang: "ES",
-    switchLangAria: "Cambiar a español",
-    cvLabel: "Curriculum Vitae",
-    cvUpdated: "Last updated July 2026",
-    print: "Print / Save PDF",
-    printAria: "Print or save this CV as PDF",
-    blogKicker: "Writing & projects",
-    blogTitle: "Blog",
-    blogIntro: "Notes on the things I build — AI clones, hackathon projects and full-stack experiments.",
-    blogEmpty: "No posts yet — check back soon.",
-    backToBlog: "Back to blog",
-  },
-  es: {
-    resume: "CV",
-    blog: "Blog",
-    switchLang: "EN",
-    switchLangAria: "Switch to English",
-    cvLabel: "Curriculum Vitae",
-    cvUpdated: "Última actualización: julio de 2026",
-    print: "Imprimir / Guardar PDF",
-    printAria: "Imprimir o guardar este CV como PDF",
-    blogKicker: "Artículos y proyectos",
-    blogTitle: "Blog",
-    blogIntro: "Notas sobre lo que construyo — clones de IA, proyectos de hackathon y experimentos full-stack.",
-    blogEmpty: "Aún no hay publicaciones — vuelve pronto.",
-    backToBlog: "Volver al blog",
-  },
+const en = {
+  resume: "Resume",
+  blog: "Blog",
+  switchLang: "ES",
+  switchLangAria: "Cambiar a español",
+  cvLabel: "Curriculum Vitae",
+  cvUpdated: "Last updated July 2026",
+  print: "Print / Save PDF",
+  printAria: "Print or save this CV as PDF",
+  blogKicker: "Writing & projects",
+  blogTitle: "Blog",
+  blogIntro:
+    "Notes on the things I build — AI clones, hackathon projects and full-stack experiments.",
+  blogEmpty: "No posts yet — check back soon.",
+  backToBlog: "Back to blog",
+  notFoundTitle: "Page not found",
+  notFoundBody:
+    "The page you're looking for doesn't exist or has been moved.",
+  goHome: "Back to home",
+} as const;
+
+export type UIKey = keyof typeof en;
+
+// Keyed by `en`, so a missing or misspelled key in `es` is a build error.
+const es: Record<UIKey, string> = {
+  resume: "CV",
+  blog: "Blog",
+  switchLang: "EN",
+  switchLangAria: "Switch to English",
+  cvLabel: "Curriculum Vitae",
+  cvUpdated: "Última actualización: julio de 2026",
+  print: "Imprimir / Guardar PDF",
+  printAria: "Imprimir o guardar este CV como PDF",
+  blogKicker: "Artículos y proyectos",
+  blogTitle: "Blog",
+  blogIntro:
+    "Notas sobre lo que construyo — clones de IA, proyectos de hackathon y experimentos full-stack.",
+  blogEmpty: "Aún no hay publicaciones — vuelve pronto.",
+  backToBlog: "Volver al blog",
+  notFoundTitle: "Página no encontrada",
+  notFoundBody:
+    "La página que buscas no existe o fue movida a otra dirección.",
+  goHome: "Volver al inicio",
 };
+
+export const UI: Record<Lang, Record<UIKey, string>> = { en, es };
 
 function stripTrailingSlash(path: string): string {
   return path.replace(/\/+$/, "") || "/";

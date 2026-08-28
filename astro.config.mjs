@@ -1,5 +1,7 @@
 import { defineConfig } from 'astro/config';
 import mdx from '@astrojs/mdx';
+import { unified } from '@astrojs/markdown-remark';
+import sitemap from '@astrojs/sitemap';
 import icon from 'astro-icon';
 import tailwindcss from '@tailwindcss/vite';
 import remarkToc from 'remark-toc';
@@ -21,18 +23,27 @@ export default defineConfig({
     "/hackathon_mexa_aletheia": "/blog/hackathon_mexa_aletheia",
     "/hackathon_portal_nexora": "/blog/hackathon_portal_nexora",
   },
+  // Shared Markdown/MDX pipeline: MDX inherits the processor defined here.
+  markdown: {
+    processor: unified({
+      remarkPlugins: [remarkToc],
+      rehypePlugins: [rehypeAccessibleEmojis],
+      remarkRehype: { footnoteLabel: 'Footnotes' },
+      gfm: false,
+    }),
+  },
   vite: {
     plugins: [tailwindcss()],
   },
   integrations: [
     icon(),
+    sitemap({
+      // 404 pages should never be indexed.
+      filter: (page) => !page.includes("/404"),
+    }),
     mdx({
       syntaxHighlight: 'shiki',
       shikiConfig: { theme: 'dracula' },
-      remarkPlugins: [remarkToc],
-      rehypePlugins: [rehypeAccessibleEmojis],
-      remarkRehype: { footnoteLabel: 'Footnotes' },
-      gfm: false,
     }),
   ],
 });

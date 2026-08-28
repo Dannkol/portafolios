@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://dannkol.com/sitemap-index.xml
