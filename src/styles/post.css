@@ -1,16 +1,19 @@
 /*
  * Blog-post reading surface.
  * Imported by src/pages/[slug].astro and src/pages/blog/[slug].astro.
- * All prose defaults use :where() (zero specificity) so any post that ships
- * its own Tailwind utility classes (e.g. proyectos.mdx) always wins.
+ * EVERY selector is wrapped in :where() so the whole stylesheet is zero
+ * specificity — any post that ships its own Tailwind utility classes
+ * (e.g. proyectos.mdx) always wins, in light and dark mode.
  */
 
-.post-prose {
+@layer base {
+
+:where(.post-prose) {
   color: #334155; /* slate-700 */
   line-height: 1.7;
 }
 
-.post-prose :where(h1) {
+:where(.post-prose) :where(h1) {
   font-size: 2.25rem;
   font-weight: 800;
   letter-spacing: -0.02em;
@@ -19,52 +22,52 @@
   line-height: 1.15;
 }
 
-.post-prose :where(h2) {
+:where(.post-prose) :where(h2) {
   font-size: 1.6rem;
   font-weight: 700;
   color: #0f172a;
   margin: 2.25rem 0 1rem;
 }
 
-.post-prose :where(h3) {
+:where(.post-prose) :where(h3) {
   font-size: 1.25rem;
   font-weight: 700;
   color: #0f172a;
   margin: 1.75rem 0 0.75rem;
 }
 
-.post-prose :where(p) {
+:where(.post-prose) :where(p) {
   margin: 0 0 1.1rem;
 }
 
-.post-prose :where(a) {
+:where(.post-prose) :where(a) {
   color: #567761;
   text-decoration: underline;
   text-underline-offset: 2px;
 }
 
-.post-prose :where(a:hover) {
+:where(.post-prose) :where(a:hover) {
   color: #45604e;
 }
 
-.post-prose :where(ul, ol) {
+:where(.post-prose) :where(ul, ol) {
   margin: 0 0 1.1rem;
   padding-left: 1.4rem;
 }
 
-.post-prose :where(ul) {
+:where(.post-prose) :where(ul) {
   list-style: disc;
 }
 
-.post-prose :where(ol) {
+:where(.post-prose) :where(ol) {
   list-style: decimal;
 }
 
-.post-prose :where(li) {
+:where(.post-prose) :where(li) {
   margin-bottom: 0.4rem;
 }
 
-.post-prose :where(blockquote) {
+:where(.post-prose) :where(blockquote) {
   border-left: 3px solid #abc2b1;
   padding-left: 1rem;
   margin: 1.25rem 0;
@@ -72,20 +75,20 @@
   font-style: italic;
 }
 
-.post-prose :where(img) {
+:where(.post-prose) :where(img) {
   max-width: 100%;
   height: auto;
   border-radius: 0.75rem;
 }
 
-.post-prose :where(hr) {
+:where(.post-prose) :where(hr) {
   border: 0;
   border-top: 1px solid #e2e8f0;
   margin: 2rem 0;
 }
 
 /* Inline code (shiki blocks keep their own inline dracula styles). */
-.post-prose :where(:not(pre) > code) {
+:where(.post-prose) :where(:not(pre) > code) {
   background: #e3ebe5;
   color: #45604e;
   padding: 0.15em 0.4em;
@@ -93,7 +96,7 @@
   font-size: 0.9em;
 }
 
-.post-prose :where(pre) {
+:where(.post-prose) :where(pre) {
   overflow-x: auto;
   border-radius: 0.75rem;
   padding: 1rem 1.25rem;
@@ -102,27 +105,26 @@
   line-height: 1.6;
 }
 
-html.dark {
-  .post-prose {
-    color: #cbd5e1;
-  }
-  .post-prose :where(h1, h2, h3) {
-    color: #f1f5f9;
-  }
-  .post-prose :where(a) {
-    color: #abc2b1;
-  }
-  .post-prose :where(a:hover) {
-    color: #c7d2fe;
-  }
-  .post-prose :where(blockquote) {
-    color: #94a3b8;
-  }
-  .post-prose :where(hr) {
-    border-color: #1e293b;
-  }
-  .post-prose :where(:not(pre) > code) {
-    background: #1e1b4b;
-    color: #c7d2fe;
-  }
+:where(html.dark) :where(.post-prose) {
+  color: #cbd5e1;
+}
+:where(html.dark) :where(.post-prose) :where(h1, h2, h3) {
+  color: #f1f5f9;
+}
+:where(html.dark) :where(.post-prose) :where(a) {
+  color: #abc2b1;
+}
+:where(html.dark) :where(.post-prose) :where(a:hover) {
+  color: #c7d2fe;
+}
+:where(html.dark) :where(.post-prose) :where(blockquote) {
+  color: #94a3b8;
+}
+:where(html.dark) :where(.post-prose) :where(hr) {
+  border-color: #1e293b;
+}
+:where(html.dark) :where(.post-prose) :where(:not(pre) > code) {
+  background: #1e1b4b;
+  color: #c7d2fe;
+}
 }
